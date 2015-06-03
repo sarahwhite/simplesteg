@@ -41,6 +41,9 @@ char* get_data(SImage img, int dataLength)
         data[c] = bits_to_byte(bytes);
     }
     
+    free(bytes);
+    free(len);
+    
     data[dataLength] = 0;
     
     return data;
@@ -69,6 +72,8 @@ int get_data_length(SImage img)
         if (data[c] == 0) break;
     }
     
+    free(bytes);
+    
     dataLength = atoi(data);
     
     return dataLength;
@@ -78,6 +83,8 @@ int find_header(SImage img)
 {
     char* bytes = malloc(strlen(HEADER) * 8);
     char* data = malloc(strlen(HEADER));
+    
+    int ret = 0;
 
     for (int c = 0; c < strlen(HEADER); ++c)
     {
@@ -92,17 +99,17 @@ int find_header(SImage img)
         data[c] = bits_to_byte(bytes);        
     }    
     
-    
-    free(bytes);
-    
     data[strlen(HEADER)] = 0;
     
     if (!strcmp(data, HEADER))
     {
-        return 1;
+        ret = 1;
     }
     
-    return 0;
+    free(bytes);
+    free(data);
+    
+    return ret;
 }
 
 void decrypt(char* filename)

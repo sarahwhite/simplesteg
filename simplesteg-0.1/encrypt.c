@@ -98,6 +98,7 @@ void encrypt(char* filename, char* data, char* outfile)
         
         save_image(outfile, img);
         
+        free(dataLength);
         close_image(img);
     }
 }
