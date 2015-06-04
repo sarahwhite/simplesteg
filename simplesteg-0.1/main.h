@@ -7,8 +7,6 @@
 
 typedef enum { false, true } bool;
 
-#include "main.h"
-
 bool argument_exists(char* arg, int argc, char* argv[]);
 char* get_argument_input(char* arg, int argc, char *argv[]);
 void print_help();
